@@ -254,7 +254,6 @@ func Fetch(ctx context.Context, mdi DocumentInterface, dbName DbName) error {
 				mdi.document().ID = &objID
 			}
 
-			cancel()
 			return bson.Unmarshal(raw, mdi.DataPtr())
 		}
 
