@@ -41,6 +41,13 @@ func Do() {
 
 	_ = am.Fetch(ctx, &fetchingPerson, dbName)
 
+	// partial fetch
+	fetchingPerson.NoFetch("Age")
+	_ = am.Fetch(ctx, &fetchingPerson, dbName)
+
+	fetchingPerson.UndoNoFetch("Age")
+	_ = am.Fetch(ctx, &fetchingPerson, dbName)
+
 	//// update
 	_ = am.AtomicUpdate(ctx, &fetchingPerson, dbName, func(ctx context.Context) error {
 		if fetchingPerson.Age > 80 {
